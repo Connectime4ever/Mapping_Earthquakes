@@ -7,3 +7,5 @@
 #### With this new project the user will be able to see those earthquakes with magnitudes greater than 4.5 in relation with the tectonic plates' location on the earth. 
 
 #### The tectonic plate data will be added to the overlay object with the earthquake data. 
+----
+## Results
