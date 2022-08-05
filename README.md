@@ -9,3 +9,4 @@
 #### The tectonic plate data will be added to the overlay object with the earthquake data. 
 ----
 ## Results
+![Del1](https://github.com/Connectime4ever/Mapping_Earthquakes/blob/main/Del1.png)
