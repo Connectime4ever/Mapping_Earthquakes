@@ -30,11 +30,13 @@ let baseMaps = {
 
 // 1. Add a 2nd layer group for the tectonic plate data.
 let allEarthquakes = new L.LayerGroup();
+let tectonicPlates = new L.LayerGroup();
 
 
 // 2. Add a reference to the tectonic plates group to the overlays object.
 let overlays = {
-  "Earthquakes": allEarthquakes
+  "Earthquakes": allEarthquakes,
+  "Tectonic Plates": tectonicPlates
 };
 
 // Then we add a control to the map that will allow the user to change which
@@ -106,6 +108,7 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
 
   // Then we add the earthquake layer to our map.
   allEarthquakes.addTo(map);
+});
 
   // Here we create a legend control object.
 let legend = L.control({
@@ -141,7 +144,27 @@ legend.onAdd = function() {
 
 
   // 3. Use d3.json to make a call to get our Tectonic Plate geoJSON data.
-  d3.json().then(() {
+  d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json").then(function(data) {
     
-  });
-});
+      function styleInfo(feature) {
+      return {
+        opacity: 1,
+        fillOpacity: 1,
+        color: "red",
+        stroke: true,
+        weight: 3
+      };
+    }
+    L.geoJson(data, {
+    	// We turn each feature into a circleMarker on the map.
+    	pointToLayer: function(feature, latlng) {
+          console.log(data);
+      		return L.polyline(latlng);
+         
+          },
+          style: styleInfo,
+  
+     } ).addTo(tectonicPlates);
+   
+        tectonicPlates.addTo(map);
+    });
